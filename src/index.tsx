@@ -1,15 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { ReactElement } from 'react';
+import { StyleSheet, View } from 'react-native';
 
-import { Home, Game } from '@screens';
+import { AppBootstrap, Text } from '@components';
 
-export default function App() {
+export default function App(): ReactElement {
 	return (
-		<View style={styles.container}>
-			<Home />
-			<Game />
-		</View>
+		<AppBootstrap>
+			<View style={styles.container}>
+				<Text onPress={() => alert('clicked')} style={{ fontSize: 25 }}>
+					First Level <Text weight="400">Second Level</Text>
+				</Text>
+			</View>
+		</AppBootstrap>
 	);
 }
 
