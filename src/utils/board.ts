@@ -6,7 +6,7 @@ export const printFormattedBoard = (state: BoardState): void => {
 		formattedString += cell ? ` ${cell} |` : '   |';
 
 		if (index % 3 === 2) {
-			formattedString = formattedString.slice(-0, -1);
+			formattedString = formattedString.slice(0, -1);
 			formattedString += '\n';
 			if (index < 8) {
 				formattedString += '---+---+---';
@@ -15,6 +15,33 @@ export const printFormattedBoard = (state: BoardState): void => {
 		}
 	});
 
+	// eslint-disable-next-line
+	console.log(formattedString);
+};
+
+export const printFormattedScores = (scores: { [key: string]: Move[] }): void => {
+	let formattedString = '';
+
+	for (let i = 0; i < 9; i++) {
+		let toPrint = '    |';
+		Object.keys(scores).filter((score: string) => {
+			if (scores[score].includes(i as Move)) {
+				toPrint = `    ${score} |`.slice(-5);
+			}
+		});
+
+		formattedString += toPrint;
+		if (i % 3 === 2) {
+			formattedString = formattedString.slice(0, -1);
+			formattedString += '\n';
+			if (i < 8) {
+				formattedString += '----+----+----';
+				formattedString += '\n';
+			}
+		}
+	}
+
+	// eslint-disable-next-line
 	console.log(formattedString);
 };
 
