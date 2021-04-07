@@ -15,7 +15,7 @@ export const printFormattedBoard = (state: BoardState): void => {
 		}
 	});
 
-	// eslint-disable-next-line
+	/* eslint-disable no-console */
 	console.log(formattedString);
 };
 
@@ -41,7 +41,7 @@ export const printFormattedScores = (scores: { [key: string]: Move[] }): void =>
 		}
 	}
 
-	// eslint-disable-next-line
+	/* eslint-disable no-console */
 	console.log(formattedString);
 };
 
