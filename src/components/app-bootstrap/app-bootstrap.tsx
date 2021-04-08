@@ -1,10 +1,13 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 import AppLoading from 'expo-app-loading';
 import {
 	useFonts,
 	DeliusUnicase_400Regular,
 	DeliusUnicase_700Bold,
 } from '@expo-google-fonts/delius-unicase';
+import { Auth, Hub } from 'aws-amplify';
+
+import { useAuth } from '@contexts/auth';
 
 type AppBootstrapProps = {
 	children: ReactNode;
@@ -12,9 +15,42 @@ type AppBootstrapProps = {
 
 export default function AppBootstrap({ children }: AppBootstrapProps): ReactElement {
 	const [fontLoaded] = useFonts({ DeliusUnicase_400Regular, DeliusUnicase_700Bold });
-	if (!fontLoaded) {
-		return <AppLoading />;
-	}
+	const [authLoaded, setAuthLoaded] = useState(false);
+	const { setUser } = useAuth();
 
-	return fontLoaded ? <>{children}</> : <AppLoading />;
+	useEffect(() => {
+		const checkCurrentUser = async () => {
+			try {
+				const response = await Auth.currentAuthenticatedUser();
+				setUser(response);
+			} catch (e) {
+				setUser(null);
+			}
+			setAuthLoaded(true);
+		};
+
+		checkCurrentUser();
+	}, []);
+
+	useEffect(() => {
+		const hubListener = (hubData: any) => {
+			const { data, event } = hubData.payload;
+			switch (event) {
+				case 'signOut':
+					setUser(null);
+					break;
+
+				case 'signIn':
+					setUser(data);
+					break;
+
+				default:
+					break;
+			}
+		};
+		Hub.listen('auth', hubListener);
+		return () => Hub.remove('auth', hubListener);
+	}, []);
+
+	return fontLoaded && authLoaded ? <>{children}</> : <AppLoading />;
 }

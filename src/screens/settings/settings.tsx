@@ -1,13 +1,23 @@
 import React, { ReactElement } from 'react';
 import { ScrollView, TouchableOpacity, View, Switch } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import styles from './settings.styles';
 import { GradientBackground, Text } from '@components';
 import { colors } from '@utils';
 import { difficulties, useSettings } from '@contexts/settings';
+import { StackNavigatorParams } from '@config/navigator';
+import { useAuth } from '@contexts/auth';
 
-export default function Settings(): ReactElement | null {
+type SettingsScreenNavigationProp = StackNavigationProp<StackNavigatorParams, 'Settings'>;
+
+type SettingsProps = {
+	navigation: SettingsScreenNavigationProp;
+};
+
+export default function Settings({ navigation }: SettingsProps): ReactElement | null {
 	const { settings, saveSetting } = useSettings();
+	const { user } = useAuth();
 
 	if (!settings) {
 		return null;
@@ -77,6 +87,19 @@ export default function Settings(): ReactElement | null {
 						onValueChange={() => saveSetting('haptics', !settings.haptics)}
 					/>
 				</View>
+				{user && (
+					<View style={[styles.field, styles.switchField]}>
+						<TouchableOpacity
+							onPress={() => {
+								navigation.navigate('ChangePassword');
+							}}
+						>
+							<Text style={[styles.label, { textDecorationLine: 'underline' }]}>
+								Change Password
+							</Text>
+						</TouchableOpacity>
+					</View>
+				)}
 			</ScrollView>
 		</GradientBackground>
 	);
