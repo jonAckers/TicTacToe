@@ -35,7 +35,7 @@ export default function SignUp({ navigation, route }: SignUpProps): ReactElement
 	const [form, setForm] = useState({
 		username: 'test1',
 		name: 'Test Name',
-		email: 'kailash@cbrolleru.com',
+		email: 'fizza@jvunsigned.com',
 		password: 'password',
 	});
 	const [loading, setLoading] = useState(false);

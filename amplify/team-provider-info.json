@@ -14,6 +14,24 @@
 		"categories": {
 			"auth": {
 				"tictactoe766a6083": {}
+			},
+			"function": {
+				"postConfirmation": {
+					"deploymentBucketName": "amplify-tictactoe-dev-220623-deployment",
+					"s3Key": "amplify-builds/postConfirmation-644b663264516c6e6c55-build.zip"
+				},
+				"preAuth": {
+					"deploymentBucketName": "amplify-tictactoe-dev-220623-deployment",
+					"s3Key": "amplify-builds/preAuth-55424a6a58734b2b3731-build.zip"
+				},
+				"startGame": {
+					"deploymentBucketName": "amplify-tictactoe-dev-220623-deployment",
+					"s3Key": "amplify-builds/startGame-66626a515a514e767652-build.zip"
+				},
+				"playMove": {
+					"deploymentBucketName": "amplify-tictactoe-dev-220623-deployment",
+					"s3Key": "amplify-builds/playMove-4176304f4e736c4b4444-build.zip"
+				}
 			}
 		}
 	}
