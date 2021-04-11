@@ -29,7 +29,6 @@ exports.handler = async (event, context, callback) => {
 			$name: String!
 			$cognitoID: String!
 			$username: String!
-			$name: String!
 			$email: AWSEmail!
 		) {
 			createPlayer(
@@ -52,6 +51,6 @@ exports.handler = async (event, context, callback) => {
 		});
 		callback(null, event);
 	} catch (e) {
-		callback(e);
+		callback(error);
 	}
 };

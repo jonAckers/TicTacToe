@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-import { colors } from '@utils';
+import { colors, globalStyles } from '@utils';
 
 const styles = StyleSheet.create({
+	...globalStyles,
 	choice: {
 		backgroundColor: colors.lightGreen,
 		padding: 10,
@@ -17,10 +18,6 @@ const styles = StyleSheet.create({
 	choiceText: {
 		color: colors.darkPurple,
 		fontSize: 16,
-	},
-	container: {
-		paddingHorizontal: 30,
-		paddingVertical: 40,
 	},
 	field: {
 		marginBottom: 30,

@@ -1,11 +1,9 @@
-import { colors } from '@utils';
 import { StyleSheet } from 'react-native';
 
+import { colors, globalStyles } from '@utils';
+
 const styles = StyleSheet.create({
-	container: {
-		paddingHorizontal: 30,
-		paddingVertical: 40,
-	},
+	...globalStyles,
 	forgotPasswordLink: {
 		color: colors.lightGreen,
 		textAlign: 'right',

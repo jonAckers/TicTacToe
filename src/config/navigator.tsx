@@ -7,6 +7,8 @@ import {
 	ForgotPassword,
 	Home,
 	Login,
+	MultiplayerGame,
+	MultiplayerHome,
 	Settings,
 	SignUp,
 	SinglePlayerGame,
@@ -17,7 +19,11 @@ export type StackNavigatorParams = {
 	ChangePassword: undefined;
 	ForgotPassword: undefined;
 	Home: undefined;
-	Login: undefined;
+	Login: { redirect: keyof StackNavigatorParams } | undefined;
+	MultiplayerGame:
+		| { gameId: string; invitee?: undefined }
+		| { invitee: string; gameId?: undefined };
+	MultiplayerHome: undefined;
 	Settings: undefined;
 	SignUp: { username: string } | undefined;
 	SinglePlayerGame: undefined;
@@ -61,6 +67,16 @@ export default function Navigator(): ReactElement {
 				/>
 				<Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
 				<Stack.Screen name="Login" component={Login} />
+				<Stack.Screen
+					name="MultiplayerGame"
+					component={MultiplayerGame}
+					options={{ headerShown: false }}
+				/>
+				<Stack.Screen
+					name="MultiplayerHome"
+					component={MultiplayerHome}
+					options={{ title: 'Multiplayer' }}
+				/>
 				<Stack.Screen name="Settings" component={Settings} />
 				<Stack.Screen name="SignUp" component={SignUp} options={{ title: 'Sign Up' }} />
 				<Stack.Screen

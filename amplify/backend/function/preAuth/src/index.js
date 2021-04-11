@@ -37,7 +37,6 @@ exports.handler = async (event, context, callback) => {
 			$name: String!
 			$cognitoID: String!
 			$username: String!
-			$name: String!
 			$email: AWSEmail!
 		) {
 			createPlayer(
@@ -59,18 +58,22 @@ exports.handler = async (event, context, callback) => {
 		if (response.data.getPlayer) {
 			callback(null, event);
 		} else {
-			await graphqlClient.mutate({
-				mutation,
-				variables: {
-					name: event.request.userAttributes.name,
-					username: event.userName,
-					cognitoID: event.request.userAttributes.sub,
-					email: event.request.userAttributes.email,
-				},
-			});
-			callback(null, event);
+			try {
+				await graphqlClient.mutate({
+					mutation,
+					variables: {
+						name: event.request.userAttributes.name,
+						username: event.userName,
+						cognitoID: event.request.userAttributes.sub,
+						email: event.request.userAttributes.email,
+					},
+				});
+				callback(null, event);
+			} catch (e) {
+				callback(error);
+			}
 		}
 	} catch (e) {
-		callback(e);
+		callback(error);
 	}
 };

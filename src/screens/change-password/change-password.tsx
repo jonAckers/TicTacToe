@@ -35,8 +35,8 @@ export default function ChangePassword(): ReactElement {
 				oldPassword: '',
 				newPassword: '',
 			});
-		} catch (error) {
-			Alert.alert('Error!', error.message || 'An error has occurred!');
+		} catch (e) {
+			Alert.alert('Error!', e.message || 'An error has occurred!');
 		}
 		setLoading(false);
 	};

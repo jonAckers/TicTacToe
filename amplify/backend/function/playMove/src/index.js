@@ -93,7 +93,7 @@ exports.handler = async (event) => {
 
 		if (terminalState.winner === 'x') {
 			newWinner = game.initiator;
-		} else if (terminalState === 'o') {
+		} else if (terminalState.winner === 'o') {
 			newWinner = invitee;
 		}
 	}
@@ -120,7 +120,7 @@ exports.handler = async (event) => {
 		}
 	`;
 
-	const gameMutationResponse = graphqlClient.mutate({
+	const gameMutationResponse = await graphqlClient.mutate({
 		mutation: gameMutation,
 		variables: {
 			id: gameId,

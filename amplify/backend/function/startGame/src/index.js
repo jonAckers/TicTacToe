@@ -27,7 +27,7 @@ exports.handler = async (event) => {
 	const initiator = event.identity.username;
 	const invitee = event.arguments.invitee;
 
-	// 1. Make sure initiator and invitee exist
+	//1. Make sure initiator and invitee exist
 	const playerQuery = gql`
 		query getPlayer($username: String!) {
 			getPlayer(username: $username) {
@@ -38,23 +38,27 @@ exports.handler = async (event) => {
 
 	const initiatorResponse = await graphqlClient.query({
 		query: playerQuery,
-		variables: { username: initiator },
+		variables: {
+			username: initiator,
+		},
 	});
 
 	const inviteeResponse = await graphqlClient.query({
 		query: playerQuery,
-		variables: { username: invitee },
+		variables: {
+			username: invitee,
+		},
 	});
 
 	if (!initiatorResponse.data.getPlayer || !inviteeResponse.data.getPlayer) {
 		throw new Error('At least 1 player does not exist!');
 	}
 
-	if (initiator.data.getPlayer.id === inviteeResponse.data.getPlayer.id) {
+	if (initiatorResponse.data.getPlayer.id === inviteeResponse.data.getPlayer.id) {
 		throw new Error('You cannot invite yourself to a game!');
 	}
 
-	// 2. Create a new Game
+	//2. Creating a new Game
 	const gameMutation = gql`
 		mutation createGame(
 			$status: GameStatus!
@@ -92,7 +96,7 @@ exports.handler = async (event) => {
 		},
 	});
 
-	// 3. Link the Game with the players (by creating a playerGame model)
+	//3. Linking the Game with the players (by creating a playerGame model)
 	const playerGameMutation = gql`
 		mutation createPlayerGame($gameID: ID!, $playerUsername: String!, $owners: [String!]!) {
 			createPlayerGame(

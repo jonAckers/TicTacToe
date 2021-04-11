@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-import { globalStyles } from '@utils';
-
 const styles = StyleSheet.create({
-	...globalStyles,
+	container: {
+		paddingHorizontal: 30,
+		paddingVertical: 40,
+	},
 });
 
 export default styles;

@@ -1,5 +1,6 @@
 import React, { ReactElement, useRef, useState } from 'react';
 import { Alert, ScrollView, TextInput as NativeTextInput, TouchableOpacity } from 'react-native';
+import { RouteProp } from '@react-navigation/core';
 import { Auth } from 'aws-amplify';
 
 import styles from './login.styles';
@@ -9,9 +10,11 @@ import { StackNavigatorParams } from '@config/navigator';
 
 type LoginProps = {
 	navigation: StackNavigationProp<StackNavigatorParams, 'Login'>;
+	route: RouteProp<StackNavigatorParams, 'Login'>;
 };
 
-export default function Login({ navigation }: LoginProps): ReactElement {
+export default function Login({ navigation, route }: LoginProps): ReactElement {
+	const redirect = route.params?.redirect;
 	const passwordRef = useRef<NativeTextInput | null>(null);
 
 	const [form, setForm] = useState({ username: 'test', password: 'password' });
@@ -27,7 +30,11 @@ export default function Login({ navigation }: LoginProps): ReactElement {
 		const { username, password } = form;
 		try {
 			await Auth.signIn(username, password);
-			navigation.navigate('Home');
+			if (redirect) {
+				navigation.replace(redirect);
+			} else {
+				navigation.navigate('Home');
+			}
 		} catch (e) {
 			if (e.code === 'UserNotConfirmedException') {
 				navigation.navigate('SignUp', { username });

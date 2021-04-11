@@ -3,7 +3,7 @@ const isEmpty = (state) => {
 };
 
 const isFull = (state) => {
-	return state.every((cell) => cell !== null);
+	return state.every((cell) => cell);
 };
 
 const isTerminal = (state) => {
@@ -29,11 +29,7 @@ const isTerminal = (state) => {
 		const line = winningLines[i];
 		const [cell0, cell1, cell2] = line;
 
-		if (
-			state[cell0] !== null &&
-			state[cell0] === state[cell1] &&
-			state[cell0] === state[cell2]
-		) {
+		if (state[cell0] && state[cell0] === state[cell1] && state[cell0] === state[cell2]) {
 			const result = {
 				winner: state[cell0],
 			};

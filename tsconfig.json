@@ -11,6 +11,7 @@
 		"baseUrl": ".",
 		"allowJs": true,
 		"paths": {
+			"@api": ["src/API"],
 			"@assets/*": ["assets/*"],
 			"@components": ["src/components"],
 			"@config/*": ["src/config/*"],
