@@ -6,8 +6,18 @@ import {
 	DeliusUnicase_700Bold,
 } from '@expo-google-fonts/delius-unicase';
 import { Auth, Hub } from 'aws-amplify';
+import * as Notifications from 'expo-notifications';
 
 import { useAuth } from '@contexts/auth';
+import { initNotifications } from '@utils';
+
+Notifications.setNotificationHandler({
+	handleNotification: async () => ({
+		shouldShowAlert: true,
+		shouldPlaySound: false,
+		shouldSetBadge: false,
+	}),
+});
 
 type AppBootstrapProps = {
 	children: ReactNode;
@@ -23,6 +33,7 @@ export default function AppBootstrap({ children }: AppBootstrapProps): ReactElem
 			try {
 				const response = await Auth.currentAuthenticatedUser();
 				setUser(response);
+				initNotifications();
 			} catch (e) {
 				setUser(null);
 			}
@@ -42,6 +53,7 @@ export default function AppBootstrap({ children }: AppBootstrapProps): ReactElem
 
 				case 'signIn':
 					setUser(data);
+					initNotifications();
 					break;
 
 				default:

@@ -3,6 +3,8 @@ export { default as colors } from './colors';
 export * from './common.graphql';
 export { default as getErrorMessage } from './error-handler';
 export { default as globalStyles } from './global-styles';
+export { default as initNotifications } from './notifications';
 export * from './player';
+export { default as signOut } from './signout';
 export { default as useSounds } from './sounds';
 export * from './types';

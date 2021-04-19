@@ -1,6 +1,11 @@
-import React, { ReactElement } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { ReactElement, useEffect, useState, useRef } from 'react';
+import {
+	NavigationContainer,
+	NavigationContainerRef,
+	StackActions,
+} from '@react-navigation/native';
 import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
+import * as Notifications from 'expo-notifications';
 
 import {
 	ChangePassword,
@@ -14,6 +19,7 @@ import {
 	SinglePlayerGame,
 } from '@screens';
 import { colors } from '@utils';
+import { useAuth } from '@contexts/auth';
 
 export type StackNavigatorParams = {
 	ChangePassword: undefined;
@@ -52,8 +58,36 @@ const navigatorOptions: StackNavigationOptions = {
 };
 
 export default function Navigator(): ReactElement {
+	const { user } = useAuth();
+
+	const navigatorRef = useRef<NavigationContainerRef | null>(null);
+	const [isNavigatorReady, setIsNavigatorReady] = useState(false);
+
+	useEffect(() => {
+		if (user && isNavigatorReady) {
+			const subscription = Notifications.addNotificationResponseReceivedListener(
+				(response) => {
+					const gameId = response.notification.request.content.data.gameId;
+
+					if (
+						navigatorRef.current?.getCurrentRoute()?.name === 'SinglePlayerGame' ||
+						navigatorRef.current?.getCurrentRoute()?.name === 'MultiplayerGame'
+					) {
+						navigatorRef.current?.dispatch(
+							StackActions.replace('MultiplayerGame', { gameId: gameId })
+						);
+					} else {
+						navigatorRef.current?.navigate('MultiplayerGame', { gameId: gameId });
+					}
+				}
+			);
+
+			return () => subscription.remove();
+		}
+	}, [user, isNavigatorReady]);
+
 	return (
-		<NavigationContainer>
+		<NavigationContainer ref={navigatorRef} onReady={() => setIsNavigatorReady(true)}>
 			<Stack.Navigator initialRouteName="Home" screenOptions={navigatorOptions}>
 				<Stack.Screen
 					name="ChangePassword"

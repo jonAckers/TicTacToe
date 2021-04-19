@@ -49,6 +49,16 @@ export const onCreatePlayer = /* GraphQL */ `
 				}
 				nextToken
 			}
+			tokens {
+				items {
+					id
+					token
+					playerUsername
+					createdAt
+					updatedAt
+				}
+				nextToken
+			}
 		}
 	}
 `;
@@ -69,6 +79,16 @@ export const onUpdatePlayer = /* GraphQL */ `
 					gameID
 					playerUsername
 					owners
+					updatedAt
+				}
+				nextToken
+			}
+			tokens {
+				items {
+					id
+					token
+					playerUsername
+					createdAt
 					updatedAt
 				}
 				nextToken
@@ -97,6 +117,16 @@ export const onDeletePlayer = /* GraphQL */ `
 				}
 				nextToken
 			}
+			tokens {
+				items {
+					id
+					token
+					playerUsername
+					createdAt
+					updatedAt
+				}
+				nextToken
+			}
 		}
 	}
 `;
@@ -118,6 +148,9 @@ export const onCreatePlayerGame = /* GraphQL */ `
 				createdAt
 				updatedAt
 				games {
+					nextToken
+				}
+				tokens {
 					nextToken
 				}
 			}
@@ -158,6 +191,9 @@ export const onUpdatePlayerGame = /* GraphQL */ `
 				games {
 					nextToken
 				}
+				tokens {
+					nextToken
+				}
 			}
 			game {
 				id
@@ -194,6 +230,9 @@ export const onDeletePlayerGame = /* GraphQL */ `
 				createdAt
 				updatedAt
 				games {
+					nextToken
+				}
+				tokens {
 					nextToken
 				}
 			}
@@ -289,6 +328,69 @@ export const onDeleteGame = /* GraphQL */ `
 				}
 				nextToken
 			}
+		}
+	}
+`;
+export const onCreateExpoToken = /* GraphQL */ `
+	subscription OnCreateExpoToken($playerUsername: String) {
+		onCreateExpoToken(playerUsername: $playerUsername) {
+			id
+			token
+			playerUsername
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const onUpdateExpoToken = /* GraphQL */ `
+	subscription OnUpdateExpoToken($playerUsername: String) {
+		onUpdateExpoToken(playerUsername: $playerUsername) {
+			id
+			token
+			playerUsername
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const onDeleteExpoToken = /* GraphQL */ `
+	subscription OnDeleteExpoToken($playerUsername: String) {
+		onDeleteExpoToken(playerUsername: $playerUsername) {
+			id
+			token
+			playerUsername
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const onCreateExpoTicketsObject = /* GraphQL */ `
+	subscription OnCreateExpoTicketsObject {
+		onCreateExpoTicketsObject {
+			id
+			tickets
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const onUpdateExpoTicketsObject = /* GraphQL */ `
+	subscription OnUpdateExpoTicketsObject {
+		onUpdateExpoTicketsObject {
+			id
+			tickets
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const onDeleteExpoTicketsObject = /* GraphQL */ `
+	subscription OnDeleteExpoTicketsObject {
+		onDeleteExpoTicketsObject {
+			id
+			tickets
+			createdAt
+			updatedAt
 		}
 	}
 `;

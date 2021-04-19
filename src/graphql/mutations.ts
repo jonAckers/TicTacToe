@@ -24,6 +24,17 @@ export const playMove = /* GraphQL */ `
 		}
 	}
 `;
+export const addExpoToken = /* GraphQL */ `
+	mutation AddExpoToken($token: String!) {
+		addExpoToken(token: $token) {
+			id
+			token
+			playerUsername
+			createdAt
+			updatedAt
+		}
+	}
+`;
 export const createPlayer = /* GraphQL */ `
 	mutation CreatePlayer($input: CreatePlayerInput!, $condition: ModelPlayerConditionInput) {
 		createPlayer(input: $input, condition: $condition) {
@@ -41,6 +52,16 @@ export const createPlayer = /* GraphQL */ `
 					gameID
 					playerUsername
 					owners
+					updatedAt
+				}
+				nextToken
+			}
+			tokens {
+				items {
+					id
+					token
+					playerUsername
+					createdAt
 					updatedAt
 				}
 				nextToken
@@ -69,6 +90,16 @@ export const updatePlayer = /* GraphQL */ `
 				}
 				nextToken
 			}
+			tokens {
+				items {
+					id
+					token
+					playerUsername
+					createdAt
+					updatedAt
+				}
+				nextToken
+			}
 		}
 	}
 `;
@@ -89,6 +120,16 @@ export const deletePlayer = /* GraphQL */ `
 					gameID
 					playerUsername
 					owners
+					updatedAt
+				}
+				nextToken
+			}
+			tokens {
+				items {
+					id
+					token
+					playerUsername
+					createdAt
 					updatedAt
 				}
 				nextToken
@@ -117,6 +158,9 @@ export const createPlayerGame = /* GraphQL */ `
 				createdAt
 				updatedAt
 				games {
+					nextToken
+				}
+				tokens {
 					nextToken
 				}
 			}
@@ -160,6 +204,9 @@ export const updatePlayerGame = /* GraphQL */ `
 				games {
 					nextToken
 				}
+				tokens {
+					nextToken
+				}
 			}
 			game {
 				id
@@ -199,6 +246,9 @@ export const deletePlayerGame = /* GraphQL */ `
 				createdAt
 				updatedAt
 				games {
+					nextToken
+				}
+				tokens {
 					nextToken
 				}
 			}
@@ -294,6 +344,87 @@ export const deleteGame = /* GraphQL */ `
 				}
 				nextToken
 			}
+		}
+	}
+`;
+export const createExpoToken = /* GraphQL */ `
+	mutation CreateExpoToken(
+		$input: CreateExpoTokenInput!
+		$condition: ModelExpoTokenConditionInput
+	) {
+		createExpoToken(input: $input, condition: $condition) {
+			id
+			token
+			playerUsername
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const updateExpoToken = /* GraphQL */ `
+	mutation UpdateExpoToken(
+		$input: UpdateExpoTokenInput!
+		$condition: ModelExpoTokenConditionInput
+	) {
+		updateExpoToken(input: $input, condition: $condition) {
+			id
+			token
+			playerUsername
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const deleteExpoToken = /* GraphQL */ `
+	mutation DeleteExpoToken(
+		$input: DeleteExpoTokenInput!
+		$condition: ModelExpoTokenConditionInput
+	) {
+		deleteExpoToken(input: $input, condition: $condition) {
+			id
+			token
+			playerUsername
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const createExpoTicketsObject = /* GraphQL */ `
+	mutation CreateExpoTicketsObject(
+		$input: CreateExpoTicketsObjectInput!
+		$condition: ModelExpoTicketsObjectConditionInput
+	) {
+		createExpoTicketsObject(input: $input, condition: $condition) {
+			id
+			tickets
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const updateExpoTicketsObject = /* GraphQL */ `
+	mutation UpdateExpoTicketsObject(
+		$input: UpdateExpoTicketsObjectInput!
+		$condition: ModelExpoTicketsObjectConditionInput
+	) {
+		updateExpoTicketsObject(input: $input, condition: $condition) {
+			id
+			tickets
+			createdAt
+			updatedAt
+		}
+	}
+`;
+export const deleteExpoTicketsObject = /* GraphQL */ `
+	mutation DeleteExpoTicketsObject(
+		$input: DeleteExpoTicketsObjectInput!
+		$condition: ModelExpoTicketsObjectConditionInput
+	) {
+		deleteExpoTicketsObject(input: $input, condition: $condition) {
+			id
+			tickets
+			createdAt
+			updatedAt
 		}
 	}
 `;

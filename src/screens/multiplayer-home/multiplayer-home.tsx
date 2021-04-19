@@ -13,6 +13,7 @@ import { GetPlayerQuery } from '@api';
 import Modal from 'react-native-modal';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { StackNavigatorParams } from '@config/navigator';
+import * as Notifications from 'expo-notifications';
 
 import styles from './multiplayer-home.styles';
 import { getPlayer, PlayerGameType } from './multiplayer-home.graphql';
@@ -68,6 +69,7 @@ export default function MultiplayerHome({ navigation }: MultiplayerHomeProps): R
 							: [...playerGames, ...newPlayerGames]
 					);
 					setNextToken(player.data.getPlayer.games.nextToken);
+					Notifications.setBadgeCountAsync(0);
 				}
 			} catch (e) {
 				Alert.alert('Error!', 'An error has occurred.');

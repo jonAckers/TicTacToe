@@ -1,12 +1,12 @@
 import React, { ReactElement, useState } from 'react';
 import { ScrollView, View, Image, Alert } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { Auth } from 'aws-amplify';
 
 import styles from './home.styles';
 import { StackNavigatorParams } from '@config/navigator';
 import { GradientBackground, Button, Text } from '@components';
 import { useAuth } from '@contexts/auth';
+import { signOut } from '@utils';
 
 type HomeProps = {
 	navigation: StackNavigationProp<StackNavigatorParams, 'Home'>;
@@ -42,8 +42,9 @@ export default function Home({ navigation }: HomeProps): ReactElement {
 							if (user) {
 								setSigningOut(true);
 								try {
-									await Auth.signOut();
+									await signOut();
 								} catch (e) {
+									console.log(e);
 									Alert.alert('Error!', 'Error signing out!');
 								}
 								setSigningOut(false);

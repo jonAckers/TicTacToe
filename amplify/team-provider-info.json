@@ -26,11 +26,19 @@
 				},
 				"startGame": {
 					"deploymentBucketName": "amplify-tictactoe-dev-220623-deployment",
-					"s3Key": "amplify-builds/startGame-694e716c3641706c4f52-build.zip"
+					"s3Key": "amplify-builds/startGame-4138364d47794a525954-build.zip"
 				},
 				"playMove": {
 					"deploymentBucketName": "amplify-tictactoe-dev-220623-deployment",
-					"s3Key": "amplify-builds/playMove-687252754b474861644f-build.zip"
+					"s3Key": "amplify-builds/playMove-6b587278537335783453-build.zip"
+				},
+				"addExpoToken": {
+					"deploymentBucketName": "amplify-tictactoe-dev-220623-deployment",
+					"s3Key": "amplify-builds/addExpoToken-6859636332665a536742-build.zip"
+				},
+				"handleExpoTickets": {
+					"deploymentBucketName": "amplify-tictactoe-dev-220623-deployment",
+					"s3Key": "amplify-builds/handleExpoTickets-544b776178715a6a3059-build.zip"
 				}
 			}
 		}
