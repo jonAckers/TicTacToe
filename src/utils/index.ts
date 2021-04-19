@@ -1,3 +1,4 @@
+export { default as showAd } from './ads';
 export * from './board';
 export { default as colors } from './colors';
 export * from './common.graphql';

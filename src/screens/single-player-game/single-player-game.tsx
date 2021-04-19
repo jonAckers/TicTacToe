@@ -1,12 +1,20 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { SafeAreaView, Dimensions, View } from 'react-native';
+import { SafeAreaView, Dimensions, View, Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import styles from './single-player-game.styles';
 import { Board, GradientBackground, Text, Button } from '@components';
-import { BoardState, Cell, getBestMove, isEmpty, isTerminal, Move, useSounds } from '@utils';
+import {
+	BoardState,
+	Cell,
+	getBestMove,
+	isEmpty,
+	isTerminal,
+	Move,
+	useSounds,
+	showAd,
+} from '@utils';
 import { difficulties, useSettings } from '@contexts/settings';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 
 export default function Game(): ReactElement {
@@ -109,6 +117,11 @@ export default function Game(): ReactElement {
 			} else {
 				playSound('draw');
 				setGamesCount({ ...gamesCount, draws: gamesCount.draws + 1 });
+			}
+
+			const totalGames = gamesCount.wins + gamesCount.draws + gamesCount.losses;
+			if (totalGames % 3 === 0) {
+				showAd();
 			}
 		} else {
 			const makeMove = async () => {

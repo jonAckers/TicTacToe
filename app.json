@@ -17,7 +17,10 @@
 		"ios": {
 			"supportsTablet": true,
 			"bundleIdentifier": "com.joncompsci.tictactoe",
-			"buildNumber": "1.0.0"
+			"buildNumber": "1.0.0",
+			"config": {
+				"googleMobileAdsAppId": "ca-app-pub-3644823313612711~4398500072"
+			}
 		},
 		"android": {
 			"adaptiveIcon": {
@@ -27,7 +30,10 @@
 			"useNextNotificationsApi": true,
 			"package": "com.joncompsci.tictactoe",
 			"versionCode": 1,
-			"googleServicesFile": "./google-services.json"
+			"googleServicesFile": "./google-services.json",
+			"config": {
+				"googleMobileAdsAppId": "ca-app-pub-3644823313612711~2490522031"
+			}
 		},
 		"web": {
 			"favicon": "./assets/favicon.png"

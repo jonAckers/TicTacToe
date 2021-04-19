@@ -19,9 +19,9 @@ import {
 	onUpdateGameById,
 	isTerminal,
 	useSounds,
+	showAd,
 } from '@utils';
 import { useAuth } from '@contexts/auth';
-import { PlayerGameType } from '../multiplayer-home/multiplayer-home.graphql';
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 
@@ -143,6 +143,8 @@ export default function MultiplayerGame({ navigation, route }: MultiplayerGamePr
 			} else {
 				playSound('lose');
 			}
+
+			showAd();
 		}
 	}, [game]);
 

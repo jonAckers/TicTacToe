@@ -3,6 +3,7 @@ import {
 	ActivityIndicator,
 	Alert,
 	FlatList,
+	Platform,
 	RefreshControl,
 	TouchableOpacity,
 	View,

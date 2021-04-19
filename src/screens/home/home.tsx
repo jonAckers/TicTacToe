@@ -16,6 +16,8 @@ export default function Home({ navigation }: HomeProps): ReactElement {
 	const { user } = useAuth();
 	const [signingOut, setSigningOut] = useState(false);
 
+	console.log(navigation);
+
 	return (
 		<GradientBackground>
 			<ScrollView contentContainerStyle={styles.container}>
