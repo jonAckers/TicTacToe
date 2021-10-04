@@ -9,3 +9,4 @@ Users' are able to play singleplayer against an AI, or multiplayer against other
 To support the multiplayer, I used AWS to create databases holding player and game information.
 
 ## Preview
+<img src="preview.jpg" width="300">
